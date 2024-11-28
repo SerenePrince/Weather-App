@@ -42,7 +42,7 @@ The Weather App is a Python application that provides real-time weather informat
 
 4. Run the application:
    ```bash
-   python weather_app.py
+   python weatherApp.py
    ```
 
 ## Usage
