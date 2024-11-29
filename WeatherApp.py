@@ -13,23 +13,23 @@ class WeatherApp(QWidget):
         super().__init__()
 
         # Initialize widgets for city input and weather display
-        self.cityLabel = QLabel("Enter city name", self)
-        self.cityInput = QLineEdit(self)
-        self.getWeatherButton = QPushButton("Get Weather", self)
+        self.city_label = QLabel("Enter city name", self)
+        self.city_input = QLineEdit(self)
+        self.get_weather_button = QPushButton("Get Weather", self)
 
         # Initialize labels for temperature and weather description
-        self.temperatureValueLabels = {
+        self.temperature_value_labels = {
             'kelvin': QLabel("", self),
             'celsius': QLabel("", self),
             'fahrenheit': QLabel("", self)
         }
-        self.temperatureLabels = {
+        self.temperature_labels = {
             'kelvin': QLabel("Kelvin", self),
             'celsius': QLabel("Celsius", self),
             'fahrenheit': QLabel("Fahrenheit", self)
         }
-        self.iconLabel = QLabel("❓", self)
-        self.descriptionLabel = QLabel("How's the weather today?", self)
+        self.icon_label = QLabel("❓", self)
+        self.description_label = QLabel("How's the weather today?", self)
 
         # Set up the user interface
         self.initializeUI()
@@ -37,59 +37,59 @@ class WeatherApp(QWidget):
     def initializeUI(self):
         """Set up the UI layout, window size, and font sizes."""
         screen = QGuiApplication.primaryScreen().availableGeometry()
-        screenWidth, screenHeight = screen.width(), screen.height()
+        screen_width, screen_height = screen.width(), screen.height()
 
         # Set window title and size
         self.setWindowTitle("Weather App")
         self.setMaximumSize(1024, 1440)
-        self.resize(int(screenWidth * 0.8), int(screenHeight * 0.8))
+        self.resize(int(screen_width * 0.8), int(screen_height * 0.8))
 
         # Dynamic font size based on screen width
-        baseFontSize = screenWidth // 50
+        base_font_size = screen_width // 50
 
         # Main layout container
-        mainLayout = QVBoxLayout()
+        main_layout = QVBoxLayout()
 
         # Weather input section
-        mainLayout.addWidget(self.cityLabel)
-        mainLayout.addWidget(self.cityInput)
-        mainLayout.addWidget(self.getWeatherButton)
+        main_layout.addWidget(self.city_label)
+        main_layout.addWidget(self.city_input)
+        main_layout.addWidget(self.get_weather_button)
 
         # Temperature display section
-        temperatureLayout = self.createTemperatureLayout()
-        mainLayout.addLayout(temperatureLayout)
+        temperature_layout = self.createTemperatureLayout()
+        main_layout.addLayout(temperature_layout)
 
         # Weather icon and description labels
-        mainLayout.addWidget(self.iconLabel)
-        mainLayout.addWidget(self.descriptionLabel)
+        main_layout.addWidget(self.icon_label)
+        main_layout.addWidget(self.description_label)
 
         # Set the main layout for the window
-        self.setLayout(mainLayout)
+        self.setLayout(main_layout)
 
         # Center align labels
-        self.cityLabel.setAlignment(Qt.AlignCenter)
-        self.cityInput.setAlignment(Qt.AlignCenter)
-        self.iconLabel.setAlignment(Qt.AlignCenter)
-        self.descriptionLabel.setAlignment(Qt.AlignCenter)
+        self.city_label.setAlignment(Qt.AlignCenter)
+        self.city_input.setAlignment(Qt.AlignCenter)
+        self.icon_label.setAlignment(Qt.AlignCenter)
+        self.description_label.setAlignment(Qt.AlignCenter)
 
         # Connect button click to fetch weather data
-        self.getWeatherButton.clicked.connect(self.getWeather)
+        self.get_weather_button.clicked.connect(self.getWeather)
 
         # Apply font sizes
-        self.applyFontSizes(baseFontSize)
+        self.applyFontSizes(base_font_size)
 
         # Center the window on the screen
         self.centerWindow()
 
-    def createLabelBox(self, temperatureValueLabel, temperatureLabel):
+    def createLabelBox(self, temperature_value_label, temperature_label):
         """Creates a temperature box with the value and corresponding unit label."""
         box = QWidget(self)
-        boxLayout = QVBoxLayout()
-        boxLayout.addWidget(temperatureValueLabel)
-        boxLayout.addWidget(temperatureLabel)
+        box_layout = QVBoxLayout()
+        box_layout.addWidget(temperature_value_label)
+        box_layout.addWidget(temperature_label)
         
         # Apply styling to the box
-        box.setLayout(boxLayout)
+        box.setLayout(box_layout)
         box.setStyleSheet("""
             background-color: #ffffff;
             border: 2px solid black;
@@ -98,25 +98,25 @@ class WeatherApp(QWidget):
         """)
 
         # Align labels in the box
-        temperatureValueLabel.setAlignment(Qt.AlignCenter)
-        temperatureLabel.setAlignment(Qt.AlignCenter)
+        temperature_value_label.setAlignment(Qt.AlignCenter)
+        temperature_label.setAlignment(Qt.AlignCenter)
 
         return box
 
     def createTemperatureLayout(self):
         """Creates and arranges the temperature labels in a horizontal layout."""
-        temperatureLayout = QHBoxLayout()
+        temperature_layout = QHBoxLayout()
 
         # Create and add temperature boxes for Kelvin, Celsius, and Fahrenheit
         for temp in ['kelvin', 'celsius', 'fahrenheit']:
-            temperatureLayout.addWidget(self.createLabelBox(self.temperatureValueLabels[temp], self.temperatureLabels[temp]))
+            temperature_layout.addWidget(self.createLabelBox(self.temperature_value_labels[temp], self.temperature_labels[temp]))
 
-        temperatureLayout.setAlignment(Qt.AlignCenter)
-        temperatureLayout.setStretch(0, 1)
-        temperatureLayout.setStretch(1, 2)  # Add stretch to the middle box (today)
-        temperatureLayout.setStretch(2, 1)
+        temperature_layout.setAlignment(Qt.AlignCenter)
+        temperature_layout.setStretch(0, 1)
+        temperature_layout.setStretch(1, 2)  # Add stretch to the middle box (today)
+        temperature_layout.setStretch(2, 1)
 
-        return temperatureLayout
+        return temperature_layout
 
     def centerWindow(self):
         """Centers the application window on the screen."""
@@ -125,52 +125,52 @@ class WeatherApp(QWidget):
         y = (screen.height() - self.height()) // 2
         self.move(x, y)
 
-    def applyFontSizes(self, baseFontSize):
+    def applyFontSizes(self, base_font_size):
         """Applies dynamic font sizes to UI elements."""
         fontSizes = {
-            self.cityLabel: baseFontSize,
-            self.cityInput: baseFontSize * 0.8,
-            self.getWeatherButton: baseFontSize * 0.8,
-            self.temperatureValueLabels['kelvin']: baseFontSize * 0.5,
-            self.temperatureValueLabels['celsius']: baseFontSize * 0.8,
-            self.temperatureValueLabels['fahrenheit']: baseFontSize * 0.5,
-            self.temperatureLabels['kelvin']: baseFontSize * 0.5,
-            self.temperatureLabels['celsius']: baseFontSize * 0.8,
-            self.temperatureLabels['fahrenheit']: baseFontSize * 0.5,
-            self.iconLabel: baseFontSize,
-            self.descriptionLabel: baseFontSize * 0.8
+            self.city_label: base_font_size,
+            self.city_input: base_font_size * 0.8,
+            self.get_weather_button: base_font_size * 0.8,
+            self.temperature_value_labels['kelvin']: base_font_size * 0.5,
+            self.temperature_value_labels['celsius']: base_font_size * 0.8,
+            self.temperature_value_labels['fahrenheit']: base_font_size * 0.5,
+            self.temperature_labels['kelvin']: base_font_size * 0.5,
+            self.temperature_labels['celsius']: base_font_size * 0.8,
+            self.temperature_labels['fahrenheit']: base_font_size * 0.5,
+            self.icon_label: base_font_size,
+            self.description_label: base_font_size * 0.8
         }
 
         for widget, size in fontSizes.items():
             widget.setFont(QFont("Segoe UI", int(size)))
             
-        self.iconLabel.setFont(QFont("Segoe UI Emoji", int(baseFontSize)))
+        self.icon_label.setFont(QFont("Segoe UI Emoji", int(base_font_size)))
 
     @staticmethod
-    def setBackgroundImage(self, fileName):
+    def setBackgroundImage(self, file_name):
         """Sets the background image of the window."""
-        if fileName == "n/a":
+        if file_name == "n/a":
             return
         
         # Resolve the full path of the file
-        filePath = os.path.join(os.path.dirname(__file__), fileName)
+        filePath = os.path.join(os.path.dirname(__file__), file_name)
         
         self.setAutoFillBackground(True)
         palette = self.palette()
-        backgroundImage = QPixmap(filePath)
+        background_image = QPixmap(filePath)
 
-        if backgroundImage.isNull():
+        if background_image.isNull():
             print(f"Error: Background image not found or failed to load. Path: {filePath}")
             return
 
-        brush = QBrush(backgroundImage)
+        brush = QBrush(background_image)
         palette.setBrush(QPalette.Window, brush)
         self.setPalette(palette)
 
     def getWeather(self):
         """Fetches weather data from the API and updates the UI."""
-        apiKey = "a2d54b865449482c777ee418fa08b516"
-        city = self.cityInput.text()
+        apiKey = "7825b0b37b3d31666b6a00e5a55b5532"
+        city = self.city_input.text()
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}"
         
         try:
@@ -181,14 +181,14 @@ class WeatherApp(QWidget):
             if data["cod"] == 200:
                 self.displayWeather(data)
                 
-        except requests.exceptions.HTTPError as httpError:
-            self.handleHTTPError(response.status_code, httpError)
+        except requests.exceptions.HTTPError as http_error:
+            self.handleHTTPError(response.status_code, http_error)
         except requests.exceptions.RequestException as req_error:
             self.displayError(f"Request Error: {req_error}")
 
     def handleHTTPError(self, status_code, error):
         """Handles different HTTP errors based on the status code."""
-        error_messages = {
+        ERROR_MESSAGES = {
             400: "400 Bad Request: Please check your input",
             401: "401 Unauthorized: Invalid API key",
             403: "403 Forbidden: Access denied",
@@ -199,67 +199,67 @@ class WeatherApp(QWidget):
             504: "504 Gateway Timeout: Server unresponsive"
         }
         
-        message = error_messages.get(status_code, f"HTTP error occurred: {error}")
+        message = ERROR_MESSAGES.get(status_code, f"HTTP error occurred: {error}")
         self.displayError(message)
 
     def displayError(self, message):
         """Displays an error message in the description label."""
-        self.descriptionLabel.setText(message)
+        self.description_label.setText(message)
     
     def displayWeather(self, data):
         """Updates the UI with weather data."""
-        temperatureKelvin = data["main"]["temp"]
-        temperatureCelsius = temperatureKelvin - 273.15
-        temperatureFahrenheit = (temperatureKelvin * 9/5) - 459.67
-        weatherId = data["weather"][0]["id"]
-        weatherDescription = data["weather"][0]["description"]
+        temperature_kelvin = data["main"]["temp"]
+        temperature_celsius = temperature_kelvin - 273.15
+        temperature_fahrenheit = (temperature_kelvin * 9/5) - 459.67
+        weather_id = data["weather"][0]["id"]
+        weather_description = data["weather"][0]["description"]
 
         # Update temperature labels
-        self.temperatureValueLabels['kelvin'].setText(f"{temperatureKelvin:.0f}°")
-        self.temperatureValueLabels['celsius'].setText(f"{temperatureCelsius:.0f}°")
-        self.temperatureValueLabels['fahrenheit'].setText(f"{temperatureFahrenheit:.0f}°")
+        self.temperature_value_labels['kelvin'].setText(f"{temperature_kelvin:.0f}°")
+        self.temperature_value_labels['celsius'].setText(f"{temperature_celsius:.0f}°")
+        self.temperature_value_labels['fahrenheit'].setText(f"{temperature_fahrenheit:.0f}°")
         
         # Update weather icon and description
-        self.iconLabel.setText(self.getIcon(weatherId))
-        self.descriptionLabel.setText(weatherDescription.title())
+        self.icon_label.setText(self.getIcon(weather_id))
+        self.description_label.setText(weather_description.title())
         
-    def getIcon(self, weatherId):
+    def getIcon(self, weather_id):
         """Returns the weather icon based on the weather ID."""
         icon = ""
         background = "n/a"
         
         # Assign icons and background based on weather conditions
-        if 200 <= weatherId <= 232:
+        if 200 <= weather_id <= 232:
             icon = "⛈️"
             # background = "thunderstorm.jpg"
-        elif 300 <= weatherId <= 321:
+        elif 300 <= weather_id <= 321:
             icon = "🌦️"
             # background = "drizzle.jpg"           
-        elif 500 <= weatherId <= 531:
+        elif 500 <= weather_id <= 531:
             icon = "🌧️"
             # background = "rain.jpg"
-        elif 600 <= weatherId <= 622:
+        elif 600 <= weather_id <= 622:
             icon = "🌨️"
             # background = "snow.jpg"
-        elif 701 <= weatherId <= 741:
+        elif 701 <= weather_id <= 741:
             icon = "🌫️"
             # background = "smoke.jpg"
-        elif 751 <= weatherId <= 761:
+        elif 751 <= weather_id <= 761:
             icon = "💨"
             # background = "dust.jpg"
-        elif weatherId == 762:
+        elif weather_id == 762:
             icon = "🌋"
             # background = "ash.jpg"
-        elif weatherId == 771:
+        elif weather_id == 771:
             icon = "🍃"
             # background = "squall.jpg"
-        elif weatherId == 781:
+        elif weather_id == 781:
             icon = "🌪️"
             # background = "tornado.jpg"
-        elif weatherId == 800:
+        elif weather_id == 800:
             icon = "☀️"
             background = "clear.jpg"
-        elif 801 <= weatherId <= 804:
+        elif 801 <= weather_id <= 804:
             icon = "☁️"
             # background = "clouds.jpg"
         else:
