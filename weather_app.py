@@ -1,9 +1,8 @@
-import sys
 import os
-import requests
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout
+from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QGuiApplication, QPalette, QPixmap, QBrush
+from weather_service import getWeather  # Import the function from weather_service.py
 
 class WeatherApp(QWidget):
     """Weather App that fetches weather data for a specified city."""
@@ -73,13 +72,18 @@ class WeatherApp(QWidget):
         self.description_label.setAlignment(Qt.AlignCenter)
 
         # Connect button click to fetch weather data
-        self.get_weather_button.clicked.connect(self.getWeather)
+        self.get_weather_button.clicked.connect(self.onGetWeatherClick)
 
         # Apply font sizes
         self.applyFontSizes(base_font_size)
 
         # Center the window on the screen
         self.centerWindow()
+
+    def onGetWeatherClick(self):
+        """Handler for 'Get Weather' button click."""
+        city = self.city_input.text()
+        getWeather(city, self)  # Call the getWeather function and pass the city and displayWeather callback
 
     def createLabelBox(self, temperature_value_label, temperature_label):
         """Creates a temperature box with the value and corresponding unit label."""
@@ -146,14 +150,13 @@ class WeatherApp(QWidget):
             
         self.icon_label.setFont(QFont("Segoe UI Emoji", int(base_font_size)))
 
-    @staticmethod
     def setBackgroundImage(self, file_name):
         """Sets the background image of the window."""
         if file_name == "n/a":
             return
         
         # Resolve the full path of the file
-        filePath = os.path.join(os.path.dirname(__file__), file_name)
+        filePath = os.path.join(os.path.dirname(__file__), "assets", file_name)
         
         self.setAutoFillBackground(True)
         palette = self.palette()
@@ -166,45 +169,6 @@ class WeatherApp(QWidget):
         brush = QBrush(background_image)
         palette.setBrush(QPalette.Window, brush)
         self.setPalette(palette)
-
-    def getWeather(self):
-        """Fetches weather data from the API and updates the UI."""
-        api_key = "enter_api_key_here"
-        city = self.city_input.text()
-        url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
-        
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            data = response.json()
-            
-            if data["cod"] == 200:
-                self.displayWeather(data)
-                
-        except requests.exceptions.HTTPError as http_error:
-            self.handleHTTPError(response.status_code, http_error)
-        except requests.exceptions.RequestException as req_error:
-            self.displayError(f"Request Error: {req_error}")
-
-    def handleHTTPError(self, status_code, error):
-        """Handles different HTTP errors based on the status code."""
-        ERROR_MESSAGES = {
-            400: "400 Bad Request: Please check your input",
-            401: "401 Unauthorized: Invalid API key",
-            403: "403 Forbidden: Access denied",
-            404: "404 Not Found: City not found",
-            500: "500 Internal Server Error: Please try again later",
-            502: "502 Bad Gateway: Invalid response from server",
-            503: "503 Service Unavailable: Server is down",
-            504: "504 Gateway Timeout: Server unresponsive"
-        }
-        
-        message = ERROR_MESSAGES.get(status_code, f"HTTP error occurred: {error}")
-        self.displayError(message)
-
-    def displayError(self, message):
-        """Displays an error message in the description label."""
-        self.description_label.setText(message)
     
     def displayWeather(self, data):
         """Updates the UI with weather data."""
@@ -227,7 +191,6 @@ class WeatherApp(QWidget):
         """Returns the weather icon based on the weather ID."""
         icon = ""
         background = "n/a"
-        
         # Assign icons and background based on weather conditions
         if 200 <= weather_id <= 232:
             icon = "⛈️"
@@ -264,14 +227,6 @@ class WeatherApp(QWidget):
             # background = "clouds.jpg"
         else:
             icon = "❓"
-        
-        # Set background image based on the weather condition
-        self.setBackgroundImage(self, background)
-
+            
+        self.setBackgroundImage(background)
         return icon
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = WeatherApp()
-    window.show()
-    sys.exit(app.exec_())
