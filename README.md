@@ -37,12 +37,12 @@ The Weather App is a Python application that provides real-time weather informat
 
 3. Obtain an API key from [OpenWeatherMap](https://openweathermap.org/). Replace the placeholder API key in the `getWeather` method with your key:
    ```python
-   apiKey = "enterApiKeyHere"
+   apiKey = "enter_api_key_here"
    ```
 
 4. Run the application:
    ```bash
-   python weatherApp.py
+   python main.py
    ```
 
 ## Usage
@@ -59,7 +59,9 @@ The Weather App is a Python application that provides real-time weather informat
 
 ```
 project/
-│-- weather_app.py      # Main application file
+│-- weather_app.py     
+│-- weather_services.py
+│-- main.py             # Main application file
 │-- assets/             # Folder for images (optional for backgrounds)
 │   └-- clear.jpg       # Example background image
 │-- README.md           # Project documentation
