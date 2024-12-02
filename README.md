@@ -61,7 +61,7 @@ The Weather App is a Python application that provides real-time weather informat
 project/
 │-- weather_app.py     
 │-- weather_services.py
-│-- main.py      # Main application file
+│-- main.py             # Main application file
 │-- assets/             # Folder for images (optional for backgrounds)
 │   └-- clear.jpg       # Example background image
 │-- README.md           # Project documentation
