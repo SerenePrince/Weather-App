@@ -1,99 +1,80 @@
-# Weather App README
+---
 
-## Overview
+# Weather App  
 
-The Weather App is a Python application that provides real-time weather information for any city using the OpenWeatherMap API. Built with the PyQt5 framework, it features an intuitive graphical user interface (GUI) where users can input a city name and view detailed weather data, including temperature in Kelvin, Celsius, and Fahrenheit, as well as weather conditions represented by icons and descriptions.
+## 🌤️ Overview  
+The **Weather App** is a Python-based application that provides real-time weather updates for any city using the **OpenWeatherMap API**. Developed with **PyQt5**, it features a clean and responsive GUI, offering detailed weather data, including temperature in Kelvin, Celsius, and Fahrenheit, along with dynamic weather icons and descriptions.  
 
-## Features
+---
 
-- **City-Based Weather Search**: Enter a city name to fetch current weather data.
-- **Temperature Display**: Shows temperatures in Kelvin, Celsius, and Fahrenheit.
-- **Dynamic Weather Icons**: Displays relevant icons for various weather conditions (e.g., ☀️ for clear skies).
-- **Error Handling**: Displays user-friendly error messages for invalid input, network errors, or unsupported city names.
-- **Responsive Design**: Dynamically adjusts font sizes and layout based on the screen resolution.
-- **Customizable Background**: Potential for dynamic background images based on weather conditions.
+## ✨ Features  
+- **City Search**: Fetch real-time weather data by entering a city name.  
+- **Temperature Conversion**: Displays temperatures in Kelvin, Celsius, and Fahrenheit.  
+- **Dynamic Icons**: Visually represents weather conditions (e.g., ☀️ for sunny skies).  
+- **Error Handling**: Provides clear feedback for invalid input or network issues.  
+- **Responsive UI**: Adapts layout and font sizes for different screen resolutions.  
 
-## Installation
+---
 
-### Prerequisites
-- Python 3.8 or higher
-- `PyQt5` library
-- `requests` library
+## 🚀 Installation  
 
-### Setup
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/weather-app.git
-   cd weather-app
-   ```
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   *(If `requirements.txt` is not provided, install manually):*
-   ```bash
-   pip install PyQt5 requests
-   ```
+### Prerequisites  
+- Python 3.8 or higher  
+- `PyQt5` and `requests` libraries  
 
-3. Obtain an API key from [OpenWeatherMap](https://openweathermap.org/). Replace the placeholder API key in the `getWeather` method with your key:
-   ```python
-   apiKey = "enter_api_key_here"
-   ```
+### Setup  
+1. Clone the repository:  
+   ```bash  
+   git clone https://github.com/SerenePrince/Weather-App.git
+   cd weather-app  
+   ```  
+2. Install dependencies:  
+   ```bash  
+   pip install -r requirements.txt  
+   ```  
+   *(If missing, manually install)*:  
+   ```bash  
+   pip install PyQt5 requests  
+   ```  
+3. Add your API key in `weather_app.py`:  
+   ```python  
+   apiKey = "your_api_key_here"  
+   ```  
+4. Run the app:  
+   ```bash  
+   python main.py  
+   ```  
 
-4. Run the application:
-   ```bash
-   python main.py
-   ```
+---
 
-## Usage
+## 🛠️ Development Highlights  
 
-1. Launch the app.
-2. Enter the name of a city (e.g., "Ottawa").
-3. Click the **Get Weather** button.
-4. View the displayed weather details:
-   - Temperatures (Kelvin, Celsius, Fahrenheit)
-   - Weather description (e.g., "Clear sky")
-   - Weather icon (e.g., ☀️ for sunny weather)
+### Technologies Used  
+- **PyQt5**: For creating the interactive graphical user interface.  
+- **OpenWeatherMap API**: To retrieve and display real-time weather data.  
 
-## File Structure
+### Key Features  
+- **Error Handling**: Covers invalid cities, network issues, and API errors.  
+- **Dynamic Elements**: Weather icons adapt to conditions; planned support for background images.  
+
+---
+
+## 📂 File Structure  
 
 ```
 project/
-│-- weather_app.py     
-│-- weather_services.py
-│-- main.py             # Main application file
-│-- assets/             # Folder for images (optional for backgrounds)
-│   └-- clear.jpg       # Example background image
-│-- README.md           # Project documentation
-│-- requirements.txt    # Python dependencies
-```
+│-- main.py             # Application entry point
+│-- weather_app.py       # GUI and app logic
+│-- weather_services.py  # API calls and data processing
+│-- requirements.txt     # Dependencies
+│-- assets/              # (Optional) Images for backgrounds/icons
+```  
 
-## Key Components
+---
 
-### User Interface
-- Built using **PyQt5**.
-- Layouts are designed with `QVBoxLayout` and `QHBoxLayout` for responsiveness.
-- Font sizes and widget dimensions adapt based on the user's screen resolution.
+## 📜 Planned Enhancements  
+- Add dynamic backgrounds for weather conditions.  
+- Introduce multi-day weather forecasting.  
+- Improve UI with animations and advanced styling.  
 
-### Weather Data Fetching
-- Uses the **OpenWeatherMap API** to retrieve weather data in JSON format.
-- Error handling for:
-  - Invalid city names
-  - Network errors
-  - API issues (e.g., unauthorized access)
-
-### Dynamic Elements
-- Weather icons adapt based on the `weatherId` from the API response.
-- Planned support for custom background images for each weather type.
-
-## Error Handling
-
-The app provides clear feedback for common issues:
-- **City Not Found**: Displays "404 Not Found: City not found."
-- **Invalid API Key**: Displays "401 Unauthorized: Invalid API key."
-- **Network Issues**: Handles general request errors gracefully.
-
-## Planned Improvements
-- Add background images for different weather conditions.
-- Implement multi-day weather forecasting.
-- Enhance UI with additional styling and animations.
+---
