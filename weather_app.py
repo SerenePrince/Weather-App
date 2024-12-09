@@ -76,6 +76,8 @@ class WeatherApp(QWidget):
 
         # Apply font sizes
         self.applyFontSizes(base_font_size)
+        
+        self.setBackgroundImage("default.jpg")
 
         # Center the window on the screen
         self.centerWindow()
@@ -83,7 +85,7 @@ class WeatherApp(QWidget):
     def onGetWeatherClick(self):
         """Handler for 'Get Weather' button click."""
         city = self.city_input.text()
-        getWeather(city, self)  # Call the getWeather function and pass the city and displayWeather callback
+        getWeather(city, self)  # Pass the current instance of WeatherApp
 
     def createLabelBox(self, temperature_value_label, temperature_label):
         """Creates a temperature box with the value and corresponding unit label."""
@@ -131,7 +133,7 @@ class WeatherApp(QWidget):
 
     def applyFontSizes(self, base_font_size):
         """Applies dynamic font sizes to UI elements."""
-        fontSizes = {
+        font_sizes = {
             self.city_label: base_font_size,
             self.city_input: base_font_size * 0.8,
             self.get_weather_button: base_font_size * 0.8,
@@ -145,7 +147,7 @@ class WeatherApp(QWidget):
             self.description_label: base_font_size * 0.8
         }
 
-        for widget, size in fontSizes.items():
+        for widget, size in font_sizes.items():
             widget.setFont(QFont("Segoe UI", int(size)))
             
         self.icon_label.setFont(QFont("Segoe UI Emoji", int(base_font_size)))
@@ -156,14 +158,14 @@ class WeatherApp(QWidget):
             return
         
         # Resolve the full path of the file
-        filePath = os.path.join(os.path.dirname(__file__), "assets", file_name)
+        file_path = os.path.join(os.path.dirname(__file__), "assets", file_name)
         
         self.setAutoFillBackground(True)
         palette = self.palette()
-        background_image = QPixmap(filePath)
+        background_image = QPixmap(file_path)
 
         if background_image.isNull():
-            print(f"Error: Background image not found or failed to load. Path: {filePath}")
+            print(f"Error: Background image not found or failed to load. Path: {file_path}")
             return
 
         brush = QBrush(background_image)
@@ -195,38 +197,49 @@ class WeatherApp(QWidget):
         if 200 <= weather_id <= 232:
             icon = "⛈️"
             # background = "thunderstorm.jpg"
+            background = "default.jpg"
         elif 300 <= weather_id <= 321:
             icon = "🌦️"
-            # background = "drizzle.jpg"           
+            # background = "drizzle.jpg"  
+            background = "default.jpg"
         elif 500 <= weather_id <= 531:
             icon = "🌧️"
             # background = "rain.jpg"
+            background = "default.jpg"
         elif 600 <= weather_id <= 622:
             icon = "🌨️"
             # background = "snow.jpg"
+            background = "default.jpg"
         elif 701 <= weather_id <= 741:
             icon = "🌫️"
             # background = "smoke.jpg"
+            background = "default.jpg"
         elif 751 <= weather_id <= 761:
             icon = "💨"
             # background = "dust.jpg"
+            background = "default.jpg"
         elif weather_id == 762:
             icon = "🌋"
             # background = "ash.jpg"
+            background = "default.jpg"
         elif weather_id == 771:
             icon = "🍃"
             # background = "squall.jpg"
+            background = "default.jpg"
         elif weather_id == 781:
             icon = "🌪️"
             # background = "tornado.jpg"
+            background = "default.jpg"
         elif weather_id == 800:
             icon = "☀️"
             background = "clear.jpg"
         elif 801 <= weather_id <= 804:
             icon = "☁️"
             # background = "clouds.jpg"
+            background = "default.jpg"
         else:
             icon = "❓"
+            background = "default.jpg"
             
         self.setBackgroundImage(background)
         return icon
