@@ -1,6 +1,8 @@
 ---
 # Weather App
 
+![weather-app-showcase1](https://github.com/user-attachments/assets/078b5a4b-160d-4784-be1c-d72f2c2ddaf8)
+
 ## 🌤️ Overview
 The **Weather App** is a Python-based application that provides real-time weather updates for any city using the **OpenWeatherMap API**. Developed with **PyQt5**, it features a clean and responsive GUI, offering detailed weather data, including temperature in Kelvin, Celsius, and Fahrenheit, along with dynamic weather icons and descriptions.
 ---
