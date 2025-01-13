@@ -1,93 +1,99 @@
 ---
-# Weather App
+
+# 🌤️ Weather App  
 
 ![weather-app-showcase1](https://github.com/user-attachments/assets/078b5a4b-160d-4784-be1c-d72f2c2ddaf8)
 
-## 🌤️ Overview
-The **Weather App** is a Python-based application that provides real-time weather updates for any city using the **OpenWeatherMap API**. Developed with **PyQt5**, it features a clean and responsive GUI, offering detailed weather data, including temperature in Kelvin, Celsius, and Fahrenheit, along with dynamic weather icons and descriptions.
----
+## 🎯 Overview  
+The **Weather App** is a simple Python project built to fetch and display real-time weather information for any city. Using the **OpenWeatherMap API** and **PyQt5** for the graphical user interface (GUI), this app allows users to search for a city and see the current temperature and weather conditions, including the weather type (e.g., sunny, cloudy, rainy).
 
-## ✨ Features
-
-- **City Search**: Fetch real-time weather data by entering a city name.
-- **Temperature Conversion**: Displays temperatures in Kelvin, Celsius, and Fahrenheit.
-- **Dynamic Icons**: Visually represents weather conditions (e.g., ☀️ for sunny skies).
-- **Error Handling**: Provides clear feedback for invalid input or network issues.
-- **Responsive UI**: Adapts layout and font sizes for different screen resolutions.
+This was my first project in Python, where I learned the basics of the language, API integration, and building a GUI application with PyQt5. The project helped me get comfortable with handling APIs, processing data, and creating a simple but functional interface.
 
 ---
 
-## 🚀 Installation
+## ✨ Features  
+- **City Search**: Fetch current weather data by entering a city name.  
+- **Temperature Display**: Shows the temperature in **Kelvin**, **Celsius**, and **Fahrenheit**.  
+- **Weather Type**: Displays weather conditions, such as **sunny**, **cloudy**, or **rainy**.  
+- **Dynamic Weather Icons**: Uses icons to visually represent weather conditions (e.g., ☀️ for sunny, 🌧️ for rainy).  
+- **Error Handling**: Provides feedback for invalid city names, network errors, or API failures.  
+- **Responsive GUI**: The interface adapts to different screen resolutions and window sizes.  
 
-### Prerequisites
+---
 
-- Python 3.8 or higher
-- `PyQt5` and `requests` libraries
+## 🛠️ Technologies Used  
+- **Python 3.8+**: Core programming language.  
+- **PyQt5**: For building the graphical user interface (GUI).  
+- **OpenWeatherMap API**: To fetch live weather data.  
+- **Requests**: For making API calls.  
 
-### Setup
+---
 
-1. Clone the repository:
+## 🚀 Getting Started  
+
+### Prerequisites  
+- **Python 3.8** or higher is required.  
+- Install the following libraries:
+  - **PyQt5**
+  - **Requests**
+
+### Setup  
+1. Clone the repository:  
    ```bash
    git clone https://github.com/SerenePrince/Weather-App.git
-   cd weather-app
+   cd weather-app  
    ```
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   _(If missing, manually install)_:
-   ```bash
-   pip install PyQt5 requests
-   ```
-3. **Obtain an OpenWeatherMap API Key**:
 
-   - Visit [OpenWeatherMap](https://openweathermap.org/api).
-   - Sign up or log in to your account.
-   - Generate a free API key from the API keys section.
+2. Install dependencies:  
+   ```bash  
+   pip install -r requirements.txt  
+   ```  
+   _(If the above doesn’t work, install dependencies manually)_:
+   ```bash  
+   pip install PyQt5 requests  
+   ```
+
+3. **Get an OpenWeatherMap API Key**:  
+   - Visit [OpenWeatherMap](https://openweathermap.org/api).  
+   - Sign up or log in, and generate a free API key.  
    - Copy the API key.
 
 4. Add your API key in `weather_app.py`:
    ```python
    apiKey = "your_api_key_here"
    ```
-5. Run the app:
-   ```bash
-   python main.py
+
+5. Run the app:  
+   ```bash  
+   python main.py  
    ```
 
 ---
 
-## 🛠️ Development Highlights
-
-### Technologies Used
-
-- **PyQt5**: For creating the interactive graphical user interface.
-- **OpenWeatherMap API**: To retrieve and display real-time weather data.
-
-### Key Features
-
-- **Error Handling**: Covers invalid cities, network issues, and API errors.
-- **Dynamic Elements**: Weather icons adapt to conditions; planned support for background images.
+## 🧠 Skills Demonstrated  
+- **Python Basics**: Learned the fundamentals of Python, including working with libraries and making API calls.  
+- **API Integration**: Integrated the **OpenWeatherMap API** to fetch real-time data and display it in the app.  
+- **GUI Development**: Used **PyQt5** to design the application's user interface, making it interactive and user-friendly.  
+- **Error Handling**: Implemented checks for invalid inputs, API issues, and network connectivity problems.  
 
 ---
 
-## 📂 File Structure
+## 📂 File Structure  
 
 ```
 project/
-│-- main.py             # Application entry point
-│-- weather_app.py       # GUI and app logic
-│-- weather_services.py  # API calls and data processing
-│-- requirements.txt     # Dependencies
-│-- assets/              # (Optional) Images for backgrounds/icons
+│-- main.py             # Main entry point for the application
+│-- weather_app.py       # Logic for handling weather data and UI
+│-- weather_services.py  # Contains functions for API calls and data processing
+│-- requirements.txt     # Lists all dependencies for the project
+│-- assets/              # (Optional) Contains icons and background images for the app
 ```
 
 ---
 
-## 📜 Planned Enhancements
-
-- Add dynamic backgrounds for weather conditions.
-- Introduce multi-day weather forecasting.
-- Improve UI with animations and advanced styling.
+## 📜 Planned Enhancements  
+- Add dynamic background images that change based on the weather conditions (e.g., a sunny background for sunny weather).  
+- Implement a **multi-day weather forecast** feature.  
+- Improve the **user interface** with animations and more advanced styling.  
 
 ---
